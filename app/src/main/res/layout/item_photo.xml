@@ -9,9 +9,10 @@
         android:id="@+id/imgPhoto"
         android:scaleType="centerCrop"
         android:adjustViewBounds="true"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/ivUserPhoto"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+
         android:src="@drawable/ic_launcher" />
 
     <TextView
@@ -20,9 +21,59 @@
         android:maxLines="3"
         android:ellipsize="end"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
+        android:text="caption"
+        android:typeface="serif"
         android:id="@+id/tvCaption"
+        android:layout_below="@+id/tvLikes"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="6dp"
+        android:textSize="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="likes"
+        android:textStyle="bold"
+        android:id="@+id/tvLikes"
+        android:layout_below="@+id/imgPhoto"
+        android:layout_toRightOf="@+id/imgHeart"
+        android:textColor="#ff3c72ff"
+        android:layout_margin="6dp"
+        android:textSize="15dp"
+        android:layout_marginLeft="2dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivUserPhoto"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="6dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="user name"
+        android:textStyle="bold"
+        android:id="@+id/tvUserName"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/ivUserPhoto"
+        android:layout_toEndOf="@+id/ivUserPhoto"
+        android:textColor="#ff3c72ff"
+        android:layout_margin="6dp" />
+
+    <ImageView
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:id="@+id/imgHeart"
         android:layout_below="@+id/imgPhoto"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_margin="6dp"
+        android:src="@drawable/blue_heart"
+        android:layout_marginRight="0dp" />
 </RelativeLayout>

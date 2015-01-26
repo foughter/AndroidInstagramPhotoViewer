@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 /**
@@ -32,11 +34,23 @@ public class InstagramPhotoAdapter extends ArrayAdapter<InstagramPhoto> {
         TextView tvCaption = (TextView) convertView.findViewById(R.id.tvCaption);
         ImageView imgPhoto = (ImageView) convertView.findViewById(R.id.imgPhoto);
 
+        // add both username and caption into one single caption with the Html.
+        // I know it's a bit hacky...
         tvCaption.setText(Html.fromHtml("<b>"+photo.username +"</b>: "+photo.caption));
 
         imgPhoto.getLayoutParams().height = photo.imageHeight;
         imgPhoto.setImageResource(0);
         Picasso.with(getContext()).load(photo.imageUrl).into(imgPhoto);
+
+        ImageView userPhoto = (ImageView) convertView.findViewById(R.id.ivUserPhoto);
+        Picasso.with(getContext()).load(photo.userPhotoUrl).placeholder(getContext().getResources().getDrawable(R.drawable.marissa_150_150)).into(userPhoto);
+
+        TextView tvUserName = (TextView) convertView.findViewById(R.id.tvUserName);
+        tvUserName.setText(photo.username);
+
+        TextView tvLikes = (TextView) convertView.findViewById(R.id.tvLikes);
+        String likeStr = photo.likesCount + " likes";
+        tvLikes.setText(likeStr);
 
         return convertView;
     }
