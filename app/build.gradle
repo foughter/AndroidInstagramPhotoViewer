@@ -28,7 +28,13 @@ dependencies {
 repositories {
     mavenCentral()
 }
-
 dependencies {
     compile 'com.makeramen:roundedimageview:1.5.0'
+}
+
+dependencies {
+    repositories {
+        mavenCentral()
+    }
+    compile 'com.github.chrisbanes.actionbarpulltorefresh:library:+'
 }

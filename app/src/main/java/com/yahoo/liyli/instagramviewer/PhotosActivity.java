@@ -2,6 +2,7 @@ package com.yahoo.liyli.instagramviewer;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -17,24 +18,55 @@ import org.apache.http.Header;
 
 import java.util.ArrayList;
 
+import uk.co.senab.actionbarpulltorefresh.library.ActionBarPullToRefresh;
+import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
+import uk.co.senab.actionbarpulltorefresh.library.listeners.OnRefreshListener;
+
 
 public class PhotosActivity extends Activity {
     public static final String CLIENT_ID="68ecacb5efa94844a70e7a6e55e44d2d";
     private ArrayList<InstagramPhoto> photos;
     private InstagramPhotoAdapter aPhotos;
 
+    private PullToRefreshLayout mPullToRefreshLayout;
+
+    private boolean ptr = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photos);
         fetchPopularPhotos();
+
+        // Now find the PullToRefreshLayout to setup
+        mPullToRefreshLayout = (PullToRefreshLayout) findViewById(R.id.ptr_layout);
+
+        // Now setup the PullToRefreshLayout
+        ActionBarPullToRefresh.from(this)
+                // Mark All Children as pullable
+                .allChildrenArePullable()
+                // Set a OnRefreshListener
+                .listener(new OnRefreshListener() {
+                    @Override
+                    public void onRefreshStarted(android.view.View view) {
+                        // Your code to refresh the list here.
+                        // Make sure you call listView.onRefreshComplete() when
+                        // once the network request has completed successfully.
+                        Log.i("INFO", "refresh...");
+                        ptr = true;
+                        fetchPopularPhotos();
+
+                    }
+                })
+                // Finally commit the setup to our PullToRefreshLayout
+                .setup(mPullToRefreshLayout);
     }
 
     private void fetchPopularPhotos() {
         photos = new ArrayList<InstagramPhoto>();
 
         aPhotos = new InstagramPhotoAdapter(this, photos);
-        ListView lvPhotos = (ListView)findViewById(R.id.lvPhotos);
+        final ListView lvPhotos = (ListView)findViewById(R.id.lvPhotos);
         lvPhotos.setAdapter(aPhotos);
 
         // https://api.instagram.com/v1/media/popular?client_id=
@@ -73,6 +105,11 @@ public class PhotosActivity extends Activity {
 
                     }
                     aPhotos.notifyDataSetChanged();
+                    if (ptr) {
+                        ptr = false;
+                        mPullToRefreshLayout.setRefreshComplete();
+                    }
+
                  } catch (JSONException e) {
                     e.printStackTrace();
                 }
