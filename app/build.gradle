@@ -24,3 +24,11 @@ dependencies {
     compile files('libs/android-async-http-1.4.6.jar')
     compile files('libs/picasso-2.4.0.jar')
 }
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.makeramen:roundedimageview:1.5.0'
+}

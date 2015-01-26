@@ -1,6 +1,7 @@
 package com.yahoo.liyli.instagramviewer;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.makeramen.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import org.w3c.dom.Text;
 
@@ -44,9 +47,16 @@ public class InstagramPhotoAdapter extends ArrayAdapter<InstagramPhoto> {
 
         ImageView userPhoto = (ImageView) convertView.findViewById(R.id.ivUserPhoto);
 
+        Transformation transformation = new RoundedTransformationBuilder()
+                .borderColor(Color.WHITE)
+                .borderWidthDp(1)
+                .cornerRadiusDp(30)
+                .oval(false)
+                .build();
+
         // add a placeholder image to the size doesn't seem right...
         //Picasso.with(getContext()).load(photo.userPhotoUrl).placeholder(getContext().getResources().getDrawable(R.drawable.marissa_150_150)).into(userPhoto);
-        Picasso.with(getContext()).load(photo.userPhotoUrl).into(userPhoto);
+        Picasso.with(getContext()).load(photo.userPhotoUrl).transform(transformation).into(userPhoto);
 
         TextView tvUserName = (TextView) convertView.findViewById(R.id.tvUserName);
         tvUserName.setText(photo.username);
