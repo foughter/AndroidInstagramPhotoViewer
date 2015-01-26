@@ -1,6 +1,7 @@
 package com.yahoo.liyli.instagramviewer;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,7 @@ public class InstagramPhotoAdapter extends ArrayAdapter<InstagramPhoto> {
         TextView tvCaption = (TextView) convertView.findViewById(R.id.tvCaption);
         ImageView imgPhoto = (ImageView) convertView.findViewById(R.id.imgPhoto);
 
-        tvCaption.setText(photo.caption);
+        tvCaption.setText(Html.fromHtml("<b>"+photo.username +"</b>: "+photo.caption));
 
         imgPhoto.getLayoutParams().height = photo.imageHeight;
         imgPhoto.setImageResource(0);
