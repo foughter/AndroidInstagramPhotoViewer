@@ -55,8 +55,9 @@ public class InstagramPhotoAdapter extends ArrayAdapter<InstagramPhoto> {
                 .build();
 
         // add a placeholder image to the size doesn't seem right...
-        //Picasso.with(getContext()).load(photo.userPhotoUrl).placeholder(getContext().getResources().getDrawable(R.drawable.marissa_150_150)).into(userPhoto);
-        Picasso.with(getContext()).load(photo.userPhotoUrl).transform(transformation).into(userPhoto);
+        Picasso.with(getContext()).load(photo.userPhotoUrl).transform(transformation).
+                placeholder(getContext().getResources().getDrawable(R.drawable.minions)).transform(transformation).into(userPhoto);
+        //Picasso.with(getContext()).load(photo.userPhotoUrl).transform(transformation).into(userPhoto);
 
         TextView tvUserName = (TextView) convertView.findViewById(R.id.tvUserName);
         tvUserName.setText(photo.username);
