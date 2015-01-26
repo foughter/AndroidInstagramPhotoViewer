@@ -80,4 +80,16 @@
         android:layout_margin="6dp"
         android:src="@drawable/blue_heart"
         android:layout_marginRight="0dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="time ago"
+        android:id="@+id/tvTimeAgo"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="6dp"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="13dp" />
 </RelativeLayout>

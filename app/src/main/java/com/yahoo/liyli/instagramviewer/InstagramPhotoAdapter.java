@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.makeramen.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
+import com.yahoo.liyli.helper.timeHelper;
 
 import org.w3c.dom.Text;
 
@@ -65,6 +66,10 @@ public class InstagramPhotoAdapter extends ArrayAdapter<InstagramPhoto> {
         TextView tvLikes = (TextView) convertView.findViewById(R.id.tvLikes);
         String likeStr = photo.likesCount + " likes";
         tvLikes.setText(likeStr);
+
+        String timeAgo = timeHelper.getTimeAgo(photo.createdAt);
+        TextView tvTimeAgo = (TextView) convertView.findViewById(R.id.tvTimeAgo);
+        tvTimeAgo.setText(timeAgo);
 
         return convertView;
     }
