@@ -43,7 +43,10 @@ public class InstagramPhotoAdapter extends ArrayAdapter<InstagramPhoto> {
         Picasso.with(getContext()).load(photo.imageUrl).into(imgPhoto);
 
         ImageView userPhoto = (ImageView) convertView.findViewById(R.id.ivUserPhoto);
-        Picasso.with(getContext()).load(photo.userPhotoUrl).placeholder(getContext().getResources().getDrawable(R.drawable.marissa_150_150)).into(userPhoto);
+
+        // add a placeholder image to the size doesn't seem right...
+        //Picasso.with(getContext()).load(photo.userPhotoUrl).placeholder(getContext().getResources().getDrawable(R.drawable.marissa_150_150)).into(userPhoto);
+        Picasso.with(getContext()).load(photo.userPhotoUrl).into(userPhoto);
 
         TextView tvUserName = (TextView) convertView.findViewById(R.id.tvUserName);
         tvUserName.setText(photo.username);
